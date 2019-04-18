@@ -10,32 +10,36 @@ GAME RULES:
 */
 
 
-var scores, roundScore, activePlayer;
+var scores, roundScore, activePlayer, gamePlaying;
 
 init();
 
 document.querySelector('.btn-roll').addEventListener('click', function () {
-    var dice = Math.floor(Math.random() * 6) + 1;
-    var diceDom = document.querySelector('.dice');
-    diceDom.style.display = 'block';
-    diceDom.src = 'dice-' + dice + '.png';
-    roundScore = roundScore + dice;
-    if (dice > 1) {
-        document.querySelector('#current-' + activePlayer).textContent = roundScore;
-    } else {
-        nextPlayer();
+    if (gamePlaying) {
+        var dice = Math.floor(Math.random() * 6) + 1;
+        var diceDom = document.querySelector('.dice');
+        diceDom.style.display = 'block';
+        diceDom.src = 'dice-' + dice + '.png';
+        roundScore = roundScore + dice;
+        if (dice > 1) {
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+        } else {
+            nextPlayer();
+        }
     }
 });
 
 document.querySelector('.btn-hold').addEventListener('click', function () {
-    scores[activePlayer] = scores[activePlayer] + roundScore;
-    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
-    if(scores[activePlayer] >= 100){
-      document.querySelector('.dice').style.display = 'none';
-      document.querySelector('#score-'+activePlayer).textContent = 'Winner';  
-     
-    }else{
-    nextPlayer();
+    if (gamePlaying) {
+        scores[activePlayer] = scores[activePlayer] + roundScore;
+        document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+        if (scores[activePlayer] >= 20) {
+            document.querySelector('.dice').style.display = 'none';
+            document.querySelector('#score-' + activePlayer).textContent = 'Winner';
+            gamePlaying = false;
+        } else {
+            nextPlayer();
+        }
     }
 });
 
@@ -56,6 +60,7 @@ function init() {
     scores = [0, 0];
     roundScore = 0;
     activePlayer = 0;
+    gamePlaying = true;
 }
 
 function nextPlayer() {
