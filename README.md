@@ -1,6 +1,6 @@
 # pkmnayak.github.io
 Its  very interesting game: 
-Open this Link to Play :  https://pkmnayak.github.io/
+Open this Link to Play :  https://pkr.github.io/
 PIG GAME RULES:
 - The game has 2 players, playing in rounds
 - In each turn, a player rolls a dice as many times as he whishes. Each result get added to his ROUND score
